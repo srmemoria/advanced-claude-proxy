@@ -1,4 +1,5 @@
 import keyring
+from typing import Optional
 from loguru import logger
 
 SERVICE_NAME = "advanced-claude-proxy"
@@ -16,7 +17,7 @@ class SecretVault:
             raise
 
     @staticmethod
-    def get_secret(key: str) -> str | None:
+    def get_secret(key: str) -> Optional[str]:
         try:
             return keyring.get_password(SERVICE_NAME, key)
         except Exception as e:

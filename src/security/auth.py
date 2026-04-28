@@ -1,5 +1,6 @@
 import jwt
 import datetime
+from typing import Optional
 from fastapi import HTTPException, Security, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic_settings import BaseSettings
@@ -11,7 +12,7 @@ class AuthSettings(BaseSettings):
 settings = AuthSettings()
 security = HTTPBearer()
 
-def create_access_token(data: dict, expires_delta: datetime.timedelta | None = None) -> str:
+def create_access_token(data: dict, expires_delta: Optional[datetime.timedelta] = None) -> str:
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.datetime.now(datetime.timezone.utc) + expires_delta
